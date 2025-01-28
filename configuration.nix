@@ -7,12 +7,6 @@
       ./fans.nix
     ];
 
-  networking = {
-    hostname = "nixos";
-    networkmanager.enable = true;
-    firewall.enable = true;
-  };
-
   boot.loader = {
 	efi.canTouchEfiVariables = true;
 
@@ -52,6 +46,16 @@
 
   console.keyMap = "sv-latin1";
 
+  networking = {
+    hostname = "nixos";
+    networkmanager.enable = true;
+    firewall.enable = true;
+  };
+
+  environment.systemPackages = with pkgs; [
+    zsh
+  ];
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
     defaultUserShell = pkgs.zsh;
@@ -68,11 +72,6 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-
-  environment.systemPackages = with pkgs; [
-    zsh
-  ];
-
 
   # Enable virtualisation through docker
   virtualisation = {
