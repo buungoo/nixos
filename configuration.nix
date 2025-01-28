@@ -9,7 +9,7 @@
     ];
 
   networking = {
-    hostname = "nas0";
+    hostname = "nixos";
     networkmanager.enable = true;
     firewall.enable = true;
   };
@@ -54,22 +54,26 @@
   console.keyMap = "sv-latin1";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.bungo = {
-    isNormalUser = true;
-    description = "bungo";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      neovim
-      git
-    ];
+  users.users = {
+    defaultUserShell = pkgs.zsh;
+    bungo = {
+      isNormalUser = true;
+      description = "bungo";
+      extraGroups = [ "networkmanager" "wheel" ];
+      packages = with pkgs; [
+        neovim
+        git
+      ];
+      shell = zsh;
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    zsh
   ];
 
-  services.openssh.enable = true;
 
   # Enable virtualisation through docker
   virtualisation = {
@@ -81,6 +85,14 @@
 	dates = "weekly";
       };
     };
+  };
+
+  services = {
+    openssh.enable = true;
+  };
+
+  programs = {
+    zsh.enable = true;
   };
 
   system.stateVersion = "24.11"; # Read docs before considering updating
