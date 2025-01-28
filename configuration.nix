@@ -60,7 +60,9 @@
     packages = with pkgs; [
       neovim
       git
+      zsh
     ];
+    shell = pkgs.zsh;
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -68,7 +70,6 @@
   environment.systemPackages = with pkgs; [
   ];
 
-  services.openssh.enable = true;
 
   # Enable virtualisation through docker
   virtualisation = {
@@ -80,6 +81,14 @@
 	dates = "weekly";
       };
     };
+  };
+
+  services = {
+    openssh.enable = true;
+  };
+
+  programs = {
+    zsh.enable = true;
   };
 
   system.stateVersion = "24.11"; # Read docs before considering updating
