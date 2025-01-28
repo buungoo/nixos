@@ -2,7 +2,7 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
       ./hardware-configuration.nix
     ];
 
@@ -31,5 +31,4 @@
       MAXPWM=hwmon3/pwm2=255
     '';
   };
-
 }
