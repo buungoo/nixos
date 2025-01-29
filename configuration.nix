@@ -47,18 +47,16 @@
   console.keyMap = "sv-latin1";
 
   networking = {
-    hostname = "nixos";
+    hostName = "nas0";
     networkmanager.enable = true;
     firewall.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
-    zsh
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
-    defaultUserShell = pkgs.zsh;
     bungo = {
       isNormalUser = true;
       description = "bungo";
@@ -67,7 +65,6 @@
         neovim
         git
       ];
-      shell = zsh;
     };
   };
 
@@ -90,7 +87,6 @@
   };
 
   programs = {
-    zsh.enable = true;
   };
 
   system.stateVersion = "24.11"; # Read docs before considering updating
